@@ -20,10 +20,7 @@ namespace Cam
         public Transform finishCameraPoint;
 
         public float clampX = 2;
-        [Space]
-        public Camera StoreCamera;
-        public Transform target1;
-        public Transform target2;
+
         private void LateUpdate()
         {
             if(target == null)
@@ -40,7 +37,7 @@ namespace Cam
         {
             var localCamPos = mainCamera.transform.localPosition;
             //localCamPos.x = Mathf.SmoothDamp(localCamPos.x, Mathf.Clamp(Controller.self.playerController.playerView.holder.localPosition.x, -clampX, clampX), ref velocity, smoothTime);
-            //localCamPos.x = Mathf.Clamp(Controller.self.playerController.playerView.holder.localPosition.x * 0.65f, -clampX, clampX);
+            localCamPos.x = Mathf.Clamp(Controller.self.playerController.playerView.transform.localPosition.x * 0.65f, -clampX, clampX);
             //if(!GlobalData.isInPurchasePage)
             //{
             //    mainCamera.transform.localPosition = localCamPos;

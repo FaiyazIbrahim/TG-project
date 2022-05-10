@@ -21,6 +21,7 @@ public class TeammateHolder : MonoBehaviour
             for (int i = 0; i < teammates.Count; i++)
             {
                 Controller.self.playerController.playerView.joinedTeammates.Add(teammates[i]);
+                
             }
         }
 

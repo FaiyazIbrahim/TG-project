@@ -300,7 +300,7 @@ public class CFXEasyEditor : EditorWindow
 			//----------------------------------------------------------------
 
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button(new GUIContent("Scale Size", "Changes the size of the Particle System(s) and other values accordingly (speed, gravity, etc.)"), GUILayout.Width(120)))
+			if(GUILayout.Button(new GUIContent("Scale Size", "Changes the size of the Particle System(s) and other values accordingly (horizontalSpeed, gravity, etc.)"), GUILayout.Width(120)))
 			{
 				applyScale();
 			}
@@ -312,7 +312,7 @@ public class CFXEasyEditor : EditorWindow
 		//----------------------------------------------------------------
 			
 			GUILayout.BeginHorizontal();
-			if(GUILayout.Button(new GUIContent("Set Speed", "Changes the simulation speed of the Particle System(s)\n1 = default speed"), GUILayout.Width(120)))
+			if(GUILayout.Button(new GUIContent("Set Speed", "Changes the simulation horizontalSpeed of the Particle System(s)\n1 = default horizontalSpeed"), GUILayout.Width(120)))
 			{
 				applySpeed();
 			}

@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class TeammateView : MonoBehaviour
 {
+    public Material joinMaterial;
+    public Material deathMaterial;
+    public Animator animator;
+    
+    public enum TeammateState { IDLE, RUN, ATTACK, DEATH };
+    public TeammateState ActiveState = TeammateState.IDLE;
 
     bool following;
+    float movementSpeed;
+
     private void Start()
     {
         TeammateHolder.followMainPlayer += LetsFollow;
+        animator = GetComponentInChildren<Animator>();
+
+        ActiveState = TeammateState.IDLE;
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -23,9 +35,36 @@ public class TeammateView : MonoBehaviour
 
     void LetsFollow()
     {
-        GetComponent<MeshRenderer>().material.color = Color.yellow;
+        //GetComponent<MeshRenderer>().material.color = Color.yellow;
+        ActiveState = TeammateState.RUN;
+        GetComponentInChildren<SkinnedMeshRenderer>().material = joinMaterial;
         following = true;
-        //Controller.self.playerController.playerView.joinedTeammates.Add(this.gameObject);
+        transform.parent = Controller.self.playerController.playerView.transform;
+
     }
-    
+
+
+
+    private void Update()
+    {
+        var pos = transform.position;
+        pos.x = Mathf.Clamp(transform.position.x, -2.2f, 2.2f);
+        transform.position = pos;
+
+        switch (ActiveState)
+        {
+            case TeammateState.RUN:
+                Run();
+                break;
+        }
+
+    }
+
+    void Run()
+    {
+        //movementSpeed = Controller.self.playerController.playerView.movementSpeed;
+        //transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+        animator.SetBool("run", true);
+    }
+
 }

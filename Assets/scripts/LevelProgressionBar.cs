@@ -36,5 +36,6 @@ public class LevelProgressionBar : MonoBehaviour
         FillUI(progressValue);
 
 
+
     }
 }
