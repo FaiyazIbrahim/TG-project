@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class TeammateView : MonoBehaviour
 {
@@ -25,10 +26,15 @@ public class TeammateView : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(!following)
+        if(!following && collision.gameObject.layer == 3)
         {
             GetComponentInParent<TeammateHolder>().FollowPlayer();
             following = true;
+        }
+        
+        if(collision.gameObject.layer == 6)
+        {
+            StartCoroutine(LetsDie());
         }
         
     }
@@ -65,6 +71,19 @@ public class TeammateView : MonoBehaviour
         //movementSpeed = Controller.self.playerController.playerView.movementSpeed;
         //transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
         animator.SetBool("run", true);
+    }
+
+    IEnumerator LetsDie()
+    {
+        Debug.Log(" died !");
+        Controller.self.effectController.ShowEffect(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z));
+        transform.parent = null;
+        animator.SetTrigger("die");
+        Controller.self.playerController.playerView.joinedTeammates.Remove(this.gameObject);
+        yield return new WaitForSeconds(1.5f);
+        transform.DOScale(0, 3);
+        yield return new WaitForSeconds(3);
+        Destroy(gameObject);
     }
 
 }

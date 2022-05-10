@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour
    
     //public UIController uiController;
     //public LevelController levelController;
-    //public EffectController effectController;
+    public EffectController effectController;
     //public EnvironmentController environmentController;
 
     
