@@ -14,7 +14,6 @@ public class EffectController : MonoBehaviour
         var p = pool.list[i];
         p.transform.position = position;
         p.gameObject.SetActive(true);
-        Debug.Log(p + " " + i);
         p.GetComponent<ParticleSystem>().Play();
     }
 

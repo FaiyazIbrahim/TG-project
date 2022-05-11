@@ -6,11 +6,21 @@ using UnityEngine.UI;
 public class LevelProgressionBar : MonoBehaviour
 {
 
+    public static LevelProgressionBar self;
+
     public Transform endTransform;
     public Image progressImage;
 
     private Vector3 endLine;
     private float fullDistance;
+
+    private void Awake()
+    {
+        if(self == null)
+        {
+            self = this;
+        }
+    }
 
     private void Start()
     {
@@ -31,10 +41,12 @@ public class LevelProgressionBar : MonoBehaviour
     private void Update()
     {
         float newDistance = GetDistance();
-        float progressValue = Mathf.InverseLerp(fullDistance,0f, newDistance);
+        if(progressImage != null)
+        {
+            float progressValue = Mathf.InverseLerp(fullDistance, 0f, newDistance);
 
-        FillUI(progressValue);
-
+            FillUI(progressValue);
+        }
 
 
     }

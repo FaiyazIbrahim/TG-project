@@ -15,7 +15,6 @@ public class TeammateHolder : MonoBehaviour
         if (followMainPlayer != null)
         {
             followMainPlayer();
-            Debug.Log("folowing player");
 
 
             for (int i = 0; i < teammates.Count; i++)

@@ -51,7 +51,7 @@ namespace Cam
             // targetRotation.y = target.eulerAngles.y;
             float vel = 0;
             targetRotation.y = Mathf.SmoothDampAngle(targetRotation.y, target.eulerAngles.y, ref vel, 0.08f);
-            cameraParent.eulerAngles = targetRotation;
+            //cameraParent.eulerAngles = targetRotation;
 
             HorizontalUpdate();
         }
