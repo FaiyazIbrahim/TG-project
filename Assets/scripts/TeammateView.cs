@@ -13,12 +13,12 @@ public class TeammateView : MonoBehaviour
     public TeammateState ActiveState = TeammateState.IDLE;
 
     bool following;
-    //float movementSpeed;
+    public bool attacking;
 
     private void Start()
     {
-        TeammateHolder.followMainPlayer += LetsFollow;
-        animator = GetComponentInChildren<Animator>();
+        //TeammateHolder.followMainPlayer += LetsFollow;
+        animator = GetComponent<Animator>();
 
         ActiveState = TeammateState.IDLE;
 
@@ -49,7 +49,7 @@ public class TeammateView : MonoBehaviour
 
     }
 
-    void LetsFollow()
+    public void LetsFollow()
     {
         //GetComponent<MeshRenderer>().material.color = Color.yellow;
         ActiveState = TeammateState.RUN;
@@ -66,8 +66,7 @@ public class TeammateView : MonoBehaviour
         var pos = transform.position;
         pos.x = Mathf.Clamp(transform.position.x, -5, 5);
         transform.position = pos;
-
-        Rotate();
+        
 
         switch (ActiveState)
         {
@@ -96,6 +95,7 @@ public class TeammateView : MonoBehaviour
         if (ActiveState != TeammateState.DEATH)
         {
             animator.SetBool("run", true);
+            Rotate();
         }
             
     }
@@ -120,15 +120,19 @@ public class TeammateView : MonoBehaviour
     public void AttackEnemy()
     {
         //transform.position = Vector3.Lerp(transform.position, target.position, 2f);
-
-        if(ActiveState != TeammateState.DEATH)
+        
+        if (ActiveState != TeammateState.DEATH)
         {
-            transform.DOMove(target.position, 1);
+            attacking = true;
+            transform.DOMove(target.position, 1.5f);
             ActiveState = TeammateState.ATTACK;
         }
-
-        
     }
 
+
+    public void win()
+    {
+        animator.SetTrigger("win");
+    }
 
 }

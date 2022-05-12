@@ -39,11 +39,11 @@ public class EnemyView : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, Controller.self.playerController.playerView.transform.position);
         
-        if(distance <= 18 && !attacking)
+        if(distance <= 10 && !attacking)
         {
             attacking = true;
-            AttackPlayer();
-            EnemyActiveState = EnemyState.RUN;
+            StartCoroutine(AttackPlayer());
+            
         }
     }
 
@@ -53,21 +53,42 @@ public class EnemyView : MonoBehaviour
         if (EnemyActiveState != EnemyState.DEATH)
         {
             animator.SetBool("run", true);
-            transform.position += transform.forward * Time.deltaTime * 1;
+            transform.position += transform.forward * Time.deltaTime * 0.5f;
         }
 
         
     }
 
 
-    void AttackPlayer()
+    IEnumerator AttackPlayer()
     {
+
+        //if(Controller.self.playerController.playerView.joinedTeammates.Count == 1)
+        //{
+        //    Debug.Log("main player detected");
+        //}
+        //else
+        //{
+
+        //}
         int victim = Random.Range(0, Controller.self.playerController.playerView.joinedTeammates.Count);
         var g = Controller.self.playerController.playerView.joinedTeammates[victim].GetComponent<TeammateView>();
-        Controller.self.playerController.playerView.joinedTeammates.Remove(g.transform.gameObject);
-        g.target = this.transform;
-        g.AttackEnemy();
-        
+
+        if (g != null && !g.attacking)
+        {
+            g.attacking = true;
+            Controller.self.playerController.playerView.joinedTeammates.Remove(g.transform.gameObject);
+            g.target = this.transform;
+            g.AttackEnemy();
+            EnemyActiveState = EnemyState.RUN;
+        }
+        else
+        {
+            StartCoroutine(AttackPlayer());
+        }
+
+
+        yield return null;
         
     }
 

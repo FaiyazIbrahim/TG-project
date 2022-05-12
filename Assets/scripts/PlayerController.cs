@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     {
         if(playerView.joinedTeammates.Count == 0)
         {
-            Debug.Log("GameOver");
+            
+            Controller.self.uiController.canvasView.GameOver(false);
         }
         else
         {

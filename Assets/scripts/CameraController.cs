@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-//using DG.Tweening;
+using DG.Tweening;
 using UnityEngine;
 
-namespace Cam
-{
-    [DefaultExecutionOrder(103)]
     public class CameraController : MonoBehaviour
     {
         public Transform target;
         public Transform cameraParent;
         public Camera mainCamera;
+        public Transform gamePlaycameraPoint;
+    
 
         public float smoothTime = .5f;
         private float velocity;
-
         public float clampX = 2;
+
+
 
         private void LateUpdate()
         {
@@ -30,6 +30,14 @@ namespace Cam
             
         }
 
+
+    public void MoveToGamePlayCamera()
+    {
+        mainCamera.transform.DOMove(gamePlaycameraPoint.position, 0.2f);
+        mainCamera.fieldOfView = 70;
+    }
+
+
         private void HorizontalUpdate()
         {
             var localCamPos = mainCamera.transform.localPosition;
@@ -42,18 +50,12 @@ namespace Cam
         private void Move()
         {
           //  cameraParent.position = Vector3.SmoothDamp(cameraParent.position, target.position, ref velocity, smoothTime);
-
             var position = target.position;
-          //  position.x = 0;
-
             cameraParent.position = position;
             var targetRotation = cameraParent.eulerAngles;
-            // targetRotation.y = target.eulerAngles.y;
             float vel = 0;
             targetRotation.y = Mathf.SmoothDampAngle(targetRotation.y, target.eulerAngles.y, ref vel, 0.08f);
-            //cameraParent.eulerAngles = targetRotation;
-
             HorizontalUpdate();
+            
         }
     }
-}

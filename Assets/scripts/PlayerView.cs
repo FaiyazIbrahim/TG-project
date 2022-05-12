@@ -13,6 +13,7 @@ public class PlayerView : MonoBehaviour
     public float horizontalSpeed;
     public float movementSpeed;
 
+    public GameObject mainPlayer;
     public Animator animator;
 
     public List<GameObject> joinedTeammates = new List<GameObject>();
@@ -32,27 +33,16 @@ public class PlayerView : MonoBehaviour
 
     private void Update()
     {
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
-        transform.position += move * horizontalSpeed * Time.deltaTime;
-        //transform.localPosition = Vector3.SmoothDamp(transform.localPosition, move, ref move, 0.05f);
-
-
         var pos = transform.position;
         pos.x = Mathf.Clamp(transform.position.x, -5f, 5f);
         transform.position = pos;
 
 
-
-
-
-
-
-        
-
         switch (ActiveGameState)
         {
             case GameState.GAMESTART:
                 transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+                MoveHorizontal();
                 break;
 
             case GameState.GAMEOVER:
@@ -65,10 +55,22 @@ public class PlayerView : MonoBehaviour
         }
         
 
-     
-
     }
 
+    void MoveHorizontal()
+    {
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+        transform.position += move * horizontalSpeed * Time.deltaTime;
+        //transform.localPosition = Vector3.SmoothDamp(transform.localPosition, move, ref move, 0.05f);
+    }
 
+    public void LevelComplete()
+    {
+        for (int i = 0; i < joinedTeammates.Count; i++)
+        {
+            joinedTeammates[i].GetComponent<TeammateView>().win();
+
+        }
+    }
 
 }
