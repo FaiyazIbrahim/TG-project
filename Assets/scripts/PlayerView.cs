@@ -61,7 +61,6 @@ public class PlayerView : MonoBehaviour
     {
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
         transform.position += move * horizontalSpeed * Time.deltaTime;
-        //transform.localPosition = Vector3.SmoothDamp(transform.localPosition, move, ref move, 0.05f);
     }
 
     public void LevelComplete()

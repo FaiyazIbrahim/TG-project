@@ -28,13 +28,7 @@ public class UIController : MonoBehaviour
 
 
 
-        
-        //if(canvas == null)
-        //{
-        //    GameObject go = Instantiate(Resources.Load("Canvas", typeof(GameObject))) as GameObject;
-        //    canvas = go;
-        //    canvasView = go.GetComponent<CanvasView>();
-        //}
+     
     }
 
 

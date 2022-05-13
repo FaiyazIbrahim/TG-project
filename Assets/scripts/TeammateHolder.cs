@@ -16,8 +16,6 @@ public class TeammateHolder : MonoBehaviour
         //{
         //    followMainPlayer();
 
-
-
         //}
         for (int i = 0; i < teammates.Count; i++)
         {

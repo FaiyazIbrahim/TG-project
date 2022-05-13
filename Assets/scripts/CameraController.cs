@@ -49,7 +49,6 @@ using UnityEngine;
 
         private void Move()
         {
-          //  cameraParent.position = Vector3.SmoothDamp(cameraParent.position, target.position, ref velocity, smoothTime);
             var position = target.position;
             cameraParent.position = position;
             var targetRotation = cameraParent.eulerAngles;

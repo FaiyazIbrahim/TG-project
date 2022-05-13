@@ -51,7 +51,6 @@ public class TeammateView : MonoBehaviour
 
     public void LetsFollow()
     {
-        //GetComponent<MeshRenderer>().material.color = Color.yellow;
         ActiveState = TeammateState.RUN;
         GetComponentInChildren<SkinnedMeshRenderer>().material = joinMaterial;
         following = true;
@@ -90,8 +89,6 @@ public class TeammateView : MonoBehaviour
 
     void Run()
     {
-        //movementSpeed = Controller.self.playerController.playerView.movementSpeed;
-        //transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
         if (ActiveState != TeammateState.DEATH)
         {
             animator.SetBool("run", true);
@@ -119,7 +116,6 @@ public class TeammateView : MonoBehaviour
 
     public void AttackEnemy()
     {
-        //transform.position = Vector3.Lerp(transform.position, target.position, 2f);
         
         if (ActiveState != TeammateState.DEATH)
         {
